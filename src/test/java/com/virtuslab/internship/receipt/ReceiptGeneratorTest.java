@@ -1,6 +1,7 @@
 package com.virtuslab.internship.receipt;
 
 import com.virtuslab.internship.basket.Basket;
+import com.virtuslab.internship.discount.DiscountManager;
 import com.virtuslab.internship.product.ProductDb;
 import org.junit.jupiter.api.Test;
 
@@ -26,14 +27,16 @@ class ReceiptGeneratorTest {
         cart.addProduct(apple);
 
         var receiptGenerator = new ReceiptGenerator();
+        var discountManager = new DiscountManager();
 
         // When
         var receipt = receiptGenerator.generate(cart);
+        var receiptAfterDiscounts = discountManager.applyAllDiscounts(receipt);
 
         // Then
         assertNotNull(receipt);
         assertEquals(3, receipt.entries().size());
-        assertEquals(expectedTotalPrice, receipt.totalPrice());
+        assertEquals(expectedTotalPrice, receiptAfterDiscounts.totalPrice());
         assertEquals(0, receipt.discounts().size());
     }
 

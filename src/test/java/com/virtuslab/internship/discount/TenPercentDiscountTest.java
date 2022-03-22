@@ -24,15 +24,15 @@ class TenPercentDiscountTest {
         receiptEntries.add(new ReceiptEntry(steak, 1));
 
         var receipt = new Receipt(receiptEntries);
-        var discount = new TenPercentDiscount();
+        var discountManager = new DiscountManager();
         var expectedTotalPrice = cheese.price().add(steak.price()).multiply(BigDecimal.valueOf(0.9));
 
         // When
-        var receiptAfterDiscount = discount.apply(receipt);
+        var receiptAfterDiscounts = discountManager.applyTenPercentDiscount(receipt);
 
         // Then
-        assertEquals(expectedTotalPrice, receiptAfterDiscount.totalPrice());
-        assertEquals(1, receiptAfterDiscount.discounts().size());
+        assertEquals(expectedTotalPrice, receiptAfterDiscounts.totalPrice());
+        assertEquals(1, receiptAfterDiscounts.discounts().size());
     }
 
     @Test
@@ -44,14 +44,14 @@ class TenPercentDiscountTest {
         receiptEntries.add(new ReceiptEntry(cheese, 2));
 
         var receipt = new Receipt(receiptEntries);
-        var discount = new TenPercentDiscount();
+        var discountManager = new DiscountManager();
         var expectedTotalPrice = cheese.price().multiply(BigDecimal.valueOf(2));
 
         // When
-        var receiptAfterDiscount = discount.apply(receipt);
+        var receiptAfterDiscounts = discountManager.applyTenPercentDiscount(receipt);
 
         // Then
-        assertEquals(expectedTotalPrice, receiptAfterDiscount.totalPrice());
-        assertEquals(0, receiptAfterDiscount.discounts().size());
+        assertEquals(expectedTotalPrice, receiptAfterDiscounts.totalPrice());
+        assertEquals(0, receiptAfterDiscounts.discounts().size());
     }
 }
