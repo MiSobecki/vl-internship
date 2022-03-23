@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class ReceiptController {
 
-    public ReceiptController() {}
-
     @PostMapping("basket")
     public Receipt createReceipt(@RequestBody Basket basket) {
         ReceiptGenerator receiptGenerator = new ReceiptGenerator();
@@ -22,11 +20,6 @@ public class ReceiptController {
         receipt = discountManager.applyAllDiscounts(receipt);
 
         return receipt;
-    }
-
-    @GetMapping("lol")
-    public int getTest() {
-        return 1;
     }
 
 }
