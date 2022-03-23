@@ -12,12 +12,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class FifteenPercentDiscountTest {
+public class AllDiscountTest {
 
     @Test
     @DisplayName("Should apply all discounts when there are at least 3 grain products and " +
             "total price after 15% discount is over 50")
-    void shouldApply15PercentDiscountTest() {
+    void shouldApplyAllDiscountsTest() {
         // Given
         var productDb = new ProductDb();
         var bread = productDb.getProduct("Bread");
@@ -43,7 +43,7 @@ public class FifteenPercentDiscountTest {
     @Test
     @DisplayName("Should not apply all discounts when there aren't at least 3 grain products or " +
             "total price after 15% discount is less than 50")
-    void shouldNotApply15PercentDiscountTest() {
+    void shouldNotApplyAllDiscountsTest() {
         // Given
         var productDb = new ProductDb();
         var bread = productDb.getProduct("Bread");
